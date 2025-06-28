@@ -12,40 +12,65 @@ namespace TodoApp
             bool exit = false;
             while (!exit)
             {
-                Console.WriteLine("/n==== MENU ====");
-                Console.WriteLine("1. Dodaj nowe zadanie");
-                Console.WriteLine("2. Wyświetl listę zadań");
-                Console.WriteLine("3. Oznacz zadanie jako ukończone");
-                Console.WriteLine("4. Usuń zadanie");
-                Console.WriteLine("5. Zakończ program");
-                Console.Write("Wybierz opcję (1-5):");
+                Console.Clear();
+                Console.Write(
+                    "==== MENU ====\n" +
+                    "1. Dodaj nowe zadanie\n" +
+                    "2. Wyświetl listę zadań\n" +
+                    "3. Oznacz zadanie jako ukończone\n" +
+                    "4. Usuń zadanie\n" +
+                    "5. Zakończ program\n" +
+                    "Wybierz opcję (1-5):");
 
-                string choice = Console.ReadLine();
+                var choice = Console.ReadKey().KeyChar;
                 Console.WriteLine();
 
                 switch (choice)
                 {
-                    case "1":
-                        //AddTask();
+                    case '1':
+                        AddTask();
                         break;
-                    case "2":
+                    case '2':
                         //ListTasks();
                         break;
-                    case "3":
+                    case '3':
                         //CompleteTask();
                         break;
-                    case "4":
+                    case '4':
                         //RemoveTask();
                         break;
-                    case "5":
+                    case '5':
                         Console.WriteLine("Koniec działania programu.");
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Nieprawidłowy wybór, spróbuj ponownie.");
+                        Console.WriteLine("Nieprawidłowe wywołanie.");
+                        WaitForInput();
                         break;
                 }
             }
+        }
+
+        static void WaitForInput()
+        {
+            Console.WriteLine("Naciśnij dowolny klawisz.");
+            Console.ReadKey();
+        }
+
+        static void AddTask()
+        {
+            Console.Write("Podaj opis nowego zadania: ");
+            string? newTask = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(newTask))
+            {
+                Console.WriteLine("Opis zadania nie może być pusty. Przerwano dodawanie.");
+                WaitForInput();
+                return;
+            }
+            tasks.Add(newTask);
+            completed.Add(false);
+            Console.WriteLine($"Dodano zadanie: \"{newTask}\"");
+            WaitForInput();
         }
     }
 }
