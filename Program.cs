@@ -34,7 +34,7 @@ namespace TodoApp
                         ListTasks();
                         break;
                     case '3':
-                        //CompleteTask();
+                        CompleteTask();
                         break;
                     case '4':
                         //RemoveTask();
@@ -49,56 +49,6 @@ namespace TodoApp
                         break;
 
                 }
-                
-                // CompeteTask        
-
-            static void CompleteTask()
-                {
-                    if (tasks.Count == 0)
-                    {
-                        Console.WriteLine("Brak zadań na liście. Nie ma czego oznaczać jako ukończone.");
-                        return;
-                    }
-
-                    // Wyświetlamy listę zadań, aby użytkownik widział numerację
-                    Console.WriteLine("Które zadanie oznaczyć jako ukończone? Wybierz numer:");
-                    for (int i = 0; i < tasks.Count; i++)
-                    {
-                        string status = completed[i] ? "[X]" : "[ ]";
-                        Console.WriteLine($"{i + 1}. {status} {tasks[i]}");
-                    }
-
-                    // Pobieramy numer od użytkownika
-                    Console.Write("Numer zadania: ");
-                    string input = Console.ReadLine();
-                    if (!int.TryParse(input, out int taskNumber))
-                    {
-                        Console.WriteLine("Wprowadzono nieprawidłowy numer.");
-                        return;
-                    }
-
-                    // Konwertujemy numer (1-based) na indeks (0-based)
-                    int index = taskNumber - 1;
-                    if (index < 0 || index >= tasks.Count)
-                    {
-                        Console.WriteLine("Zadanie o podanym numerze nie istnieje.");
-                        return;
-                    }
-
-                    if (completed[index])
-                    {
-                        Console.WriteLine($"Zadanie \"{tasks[index]}\" było już oznaczone jako ukończone.");
-                    }
-                    else
-                    {
-                        completed[index] = true;
-                        Console.WriteLine($"Zadanie \"{tasks[index]}\" oznaczono jako ukończone!");
-                    }
-                }
-          
-
-
-
             }
         }
 
@@ -138,6 +88,54 @@ namespace TodoApp
             else
             {
                 Console.WriteLine("Brak tasków.");
+            }
+            WaitForInput();
+        }
+
+        static void CompleteTask()
+        {
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine("Brak zadań na liście. Nie ma czego oznaczać jako ukończone.");
+                WaitForInput();
+                return;
+            }
+
+            // Wyświetlamy listę zadań, aby użytkownik widział numerację
+            Console.WriteLine("Które zadanie oznaczyć jako ukończone? Wybierz numer:");
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                string status = completed[i] ? "[X]" : "[ ]";
+                Console.WriteLine($"{i + 1}. {status} {tasks[i]}");
+            }
+
+            // Pobieramy numer od użytkownika
+            Console.Write("Numer zadania: ");
+            string? input = Console.ReadLine();
+            if (!int.TryParse(input, out int taskNumber))
+            {
+                Console.WriteLine("Wprowadzono nieprawidłowy numer.");
+                WaitForInput();
+                return;
+            }
+
+            // Konwertujemy numer (1-based) na indeks (0-based)
+            int index = taskNumber - 1;
+            if (index < 0 || index >= tasks.Count)
+            {
+                Console.WriteLine("Zadanie o podanym numerze nie istnieje.");
+                WaitForInput();
+                return;
+            }
+
+            if (completed[index])
+            {
+                Console.WriteLine($"Zadanie \"{tasks[index]}\" było już oznaczone jako ukończone.");
+            }
+            else
+            {
+                completed[index] = true;
+                Console.WriteLine($"Zadanie \"{tasks[index]}\" oznaczono jako ukończone!");
             }
             WaitForInput();
         }
