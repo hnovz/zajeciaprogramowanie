@@ -37,7 +37,7 @@ namespace TodoApp
                         CompleteTask();
                         break;
                     case '4':
-                        //RemoveTask();
+                        RemoveTask();
                         break;
                     case '5':
                         Console.WriteLine("Koniec działania programu.");
@@ -137,6 +137,46 @@ namespace TodoApp
                 completed[index] = true;
                 Console.WriteLine($"Zadanie \"{tasks[index]}\" oznaczono jako ukończone!");
             }
+            WaitForInput();
+
+        }
+
+        static void RemoveTask()
+        {
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine("Brak zadań do usunięcia.");
+                WaitForInput();
+                return;
+            }
+
+            Console.WriteLine("Które zadanie chcesz usunąć? Wybierz numer:");
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                string status = completed[i] ? "[x]" : "[ ]";
+                Console.WriteLine($"{i + 1}. {status} {tasks[i]}");
+            }
+
+            Console.Write("Numer zadania do usunięcia: ");
+            string? input = Console.ReadLine();
+            if (!int.TryParse(input, out int taskNumber))
+            {
+                Console.WriteLine("Wprowadzono nieprawidłowy numer.");
+                WaitForInput();
+                return;
+            }
+
+            int index = taskNumber - 1;
+            if (index < 0 || index >= tasks.Count)
+            {
+                Console.WriteLine("Zadanie o podanym numerze nie istnieje.");
+                WaitForInput();
+                return;
+            }
+
+            Console.WriteLine($"Usunięto zadanie: \"{tasks[index]}\"");
+            tasks.RemoveAt(index);
+            completed.RemoveAt(index);
             WaitForInput();
         }
     }
