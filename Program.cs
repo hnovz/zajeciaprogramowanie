@@ -21,8 +21,10 @@ namespace TodoApp
                     "4. Usuń zadanie\n" +
                     "5. Zakończ program\n" +
                     "Wybierz opcję (1-5):");
-  
+
                 var choice = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+
                 switch (choice)
                 {
                     case '1':
