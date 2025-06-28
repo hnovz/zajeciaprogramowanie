@@ -12,37 +12,38 @@ namespace TodoApp
             bool exit = false;
             while (!exit)
             {
-                Console.WriteLine("/n==== MENU ====");
-                Console.WriteLine("1. Dodaj nowe zadanie");
-                Console.WriteLine("2. Wyświetl listę zadań");
-                Console.WriteLine("3. Oznacz zadanie jako ukończone");
-                Console.WriteLine("4. Usuń zadanie");
-                Console.WriteLine("5. Zakończ program");
-                Console.Write("Wybierz opcję (1-5):");
-
-                string choice = Console.ReadLine();
-                Console.WriteLine();
-
+                Console.Clear();
+                Console.Write(
+                    "==== MENU ====\n" +
+                    "1. Dodaj nowe zadanie\n" +
+                    "2. Wyświetl listę zadań\n" +
+                    "3. Oznacz zadanie jako ukończone\n" +
+                    "4. Usuń zadanie\n" +
+                    "5. Zakończ program\n" +
+                    "Wybierz opcję (1-5):");
+  
+                var choice = Console.ReadKey().KeyChar;
                 switch (choice)
                 {
-                    case "1":
+                    case '1':
                         //AddTask();
                         break;
-                    case "2":
+                    case '2':
                         //ListTasks();
                         break;
-                    case "3":
+                    case '3':
                         //CompleteTask();
                         break;
-                    case "4":
+                    case '4':
                         //RemoveTask();
                         break;
-                    case "5":
+                    case '5':
                         Console.WriteLine("Koniec działania programu.");
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Nieprawidłowy wybór, spróbuj ponownie.");
+                        Console.WriteLine("Nieprawidłowy wybór, naciśnij dowolny klawisz.");
+                        Console.ReadKey();
                         break;
                 }
             }
