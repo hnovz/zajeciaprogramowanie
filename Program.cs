@@ -31,7 +31,7 @@ namespace TodoApp
                         AddTask();
                         break;
                     case '2':
-                        //ListTasks();
+                        ListTasks();
                         break;
                     case '3':
                         //CompleteTask();
@@ -70,6 +70,24 @@ namespace TodoApp
             tasks.Add(newTask);
             completed.Add(false);
             Console.WriteLine($"Dodano zadanie: \"{newTask}\"");
+            WaitForInput();
+        }
+
+        static void ListTasks()
+        {
+            if (tasks.Count != 0)
+            {
+                Console.WriteLine("Lista zadań:");
+                for (int i = 0; i < tasks.Count; ++i)
+                {
+                    string status = completed[i] ? "[x]" : "[ ]";
+                    Console.WriteLine($"{i + 1}. {status} {tasks[i]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Brak tasków.");
+            }
             WaitForInput();
         }
     }
