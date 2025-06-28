@@ -138,7 +138,6 @@ namespace TodoApp
                 Console.WriteLine($"Zadanie \"{tasks[index]}\" oznaczono jako ukończone!");
             }
             WaitForInput();
-
         }
 
         static void RemoveTask()
