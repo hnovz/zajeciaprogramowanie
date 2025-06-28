@@ -44,11 +44,17 @@ namespace TodoApp
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Nieprawidłowy wybór, naciśnij dowolny klawisz.");
-                        Console.ReadKey();
+                        Console.WriteLine("Nieprawidłowe wywołanie.");
+                        WaitForInput();
                         break;
                 }
             }
+        }
+
+        static void WaitForInput()
+        {
+            Console.WriteLine("Naciśnij dowolny klawisz.");
+            Console.ReadKey();
         }
 
         static void AddTask()
@@ -58,11 +64,13 @@ namespace TodoApp
             if (string.IsNullOrWhiteSpace(newTask))
             {
                 Console.WriteLine("Opis zadania nie może być pusty. Przerwano dodawanie.");
+                WaitForInput();
                 return;
             }
             tasks.Add(newTask);
             completed.Add(false);
             Console.WriteLine($"Dodano zadanie: \"{newTask}\"");
+            WaitForInput();
         }
     }
 }
