@@ -28,7 +28,7 @@ namespace TodoApp
                 switch (choice)
                 {
                     case '1':
-                        //AddTask();
+                        AddTask();
                         break;
                     case '2':
                         //ListTasks();
@@ -49,6 +49,20 @@ namespace TodoApp
                         break;
                 }
             }
+        }
+
+        static void AddTask()
+        {
+            Console.Write("Podaj opis nowego zadania: ");
+            string? newTask = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(newTask))
+            {
+                Console.WriteLine("Opis zadania nie może być pusty. Przerwano dodawanie.");
+                return;
+            }
+            tasks.Add(newTask);
+            completed.Add(false);
+            Console.WriteLine($"Dodano zadanie: \"{newTask}\"");
         }
     }
 }
